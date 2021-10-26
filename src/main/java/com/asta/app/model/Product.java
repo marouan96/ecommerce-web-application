@@ -1,12 +1,14 @@
 package com.asta.app.model;
 
+import java.sql.Blob;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 public class Product {
@@ -22,8 +24,16 @@ public class Product {
 	
 	private Double price;
 	
-	private String img;
+	@Column(name = "image_file")
+	@Lob
+	@JsonIgnore
+	private Blob imageFile;
+
+	@Column(name = "image")
+	private boolean image;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
 	private List<CustomerReview> comments;
 	
 	public Product(String title,String description,Double price, CustomerReview... comments) {
@@ -65,12 +75,20 @@ public class Product {
 		this.price = price;
 	}
 	
-	public String getImg() {
-		return img;
+	public Blob getImageFile() {
+		return imageFile;
 	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setImageFile(Blob image) {
+		this.imageFile = image;
+	}
+
+	public boolean getImage() {
+		return this.image;
+	}
+
+	public void setImage(boolean image) {
+		this.image = image;
 	}
 	
 	public List<CustomerReview> getComments() {
@@ -81,10 +99,7 @@ public class Product {
 		this.comments = comments;
 	}
 	
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", title=" + title + ", description=" + description + ", price=" + price + ", img=" + img + "]";
-	}
+	
 
 
 }
