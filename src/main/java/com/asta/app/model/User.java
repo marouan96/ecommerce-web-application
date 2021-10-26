@@ -46,6 +46,9 @@ public class User implements Serializable {
 	@Column(name="mobile_phone")
 	private Integer MobilePhoneNumber;
 	
+	@Column(name="adress")
+	private String address;
+	
 	@Column(name = "image_file")
 	@Lob
 	@JsonIgnore
@@ -113,6 +116,16 @@ public class User implements Serializable {
 	public void setMobilePhoneNumber(Integer mobilePhoneNumber) {
 		this.MobilePhoneNumber = mobilePhoneNumber;
 	}
+	
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -157,4 +170,22 @@ public class User implements Serializable {
 	public void setReviews(List<CustomerReview> reviews) {
 		this.reviews = reviews;
 	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+	
+	
 }

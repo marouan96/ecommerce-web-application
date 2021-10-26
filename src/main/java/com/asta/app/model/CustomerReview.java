@@ -28,8 +28,9 @@ public class CustomerReview {
 	@JoinColumn(name ="user_id")
 	private User user;
 	
-	@JsonBackReference(value = "product")
-	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name ="user_id")
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Product product;
 	
 	@Column(name = "stars")
