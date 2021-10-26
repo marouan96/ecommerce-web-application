@@ -24,6 +24,10 @@ public class Product {
 	
 	private Double price;
 	
+	
+    @Column(name = "quantity_in_stock")
+    private Integer quantity;
+	
 	@Column(name = "image_file")
 	@Lob
 	@JsonIgnore
@@ -75,6 +79,15 @@ public class Product {
 		this.price = price;
 	}
 	
+	
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
 	public Blob getImageFile() {
 		return imageFile;
 	}
