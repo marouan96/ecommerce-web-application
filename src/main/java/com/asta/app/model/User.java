@@ -1,45 +1,106 @@
 package com.asta.app.model;
 
+import java.io.Serializable;
+import java.sql.Blob;
 import java.util.List;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class User {
+@Table(name = "users")
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Long id;
-	private String name;
+	
+	@NotNull
+	@Pattern(regexp = "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$")
+	@Size(min = 1, max = 50)
+	@Column(name = "user_name",length = 50,nullable = false)
+	private String username;
+	
+	@Size(max = 50)
+    @Column(name = "first_name", length = 50)
+	private String firstName;
+	
+	@Size(max = 50)
+    @Column(name = "last_name", length = 50)
+	private String lastName;
+
+	@Email(regexp="^(.+)@(.+)$")
+    @Size(min = 5, max = 200)
+    @Column(name="email",length = 200, unique = true)
 	private String email;
+	
+	@Pattern(regexp = "^\\d{10}$")
+	@Column(name="mobile_phone")
 	private Integer MobilePhoneNumber;
+	
+	@Column(name = "image_file")
+	@Lob
 	@JsonIgnore
+	private Blob imageFile;
+
+	@Column(name = "image")
+	private boolean image;
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+	private Cart cart;
+	
+
+	@JsonIgnore
+	@NotNull
+    @Size(min=8, max = 50)
+    @Column(name = "password_hash", length = 50, nullable = false)
 	private String password;
+	
+	@OneToMany(mappedBy = "user",orphanRemoval = true)
+	private List<Order> orders;
+
+	@OneToMany(mappedBy = "user",orphanRemoval = true)
+	private List<CustomerReview> reviews;
+	
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
 	
-	public User(String name,String email ,Integer number,String Password, String... roles) {
-		this.name = name;
-		this.email=email;
-		this.MobilePhoneNumber=number;
-		this.password = Password;
-		this.roles = List.of(roles);
-	}
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public Blob getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(Blob image) {
+		this.imageFile = image;
+	}
+
+	public boolean getImage() {
+		return this.image;
+	}
+
+	public void setImage(boolean image) {
+		this.image = image;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -64,5 +125,36 @@ public class User {
 	public void setPassword(String Password) {
 		this.password = Password;
 	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	
+	public List<CustomerReview> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<CustomerReview> reviews) {
+		this.reviews = reviews;
+	}
 }

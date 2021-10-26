@@ -20,13 +20,13 @@ public class Product {
 	@Column(length = 50000)
 	private String description;
 	
-	private float price;
+	private Double price;
 	
 	private String img;
 	
 	private List<CustomerReview> comments;
 	
-	public Product(String title,String description,float price, CustomerReview... comments) {
+	public Product(String title,String description,Double price, CustomerReview... comments) {
 		this.title=title;
 		this.price=price;
 		this.description = description;
@@ -57,11 +57,11 @@ public class Product {
 		this.title = title;
 	}
 
-	public float getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	

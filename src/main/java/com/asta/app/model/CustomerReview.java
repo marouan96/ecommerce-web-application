@@ -1,10 +1,16 @@
 package com.asta.app.model;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class CustomerReview {
@@ -12,14 +18,22 @@ public class CustomerReview {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name ="user_id")
 	private User user;
+	
+	@Column(name = "stars")
     private Integer stars;
-    private String text;
     
-    public CustomerReview(User user, Integer stars, String text) {
+	@Column(name = "descitption")
+    private String description;
+    
+    public CustomerReview(User user, Integer stars, String description) {
 		this.user=user;
     	this.stars=stars;
-		this.text=text;
+		this.description=description;
 	}
     
 	public User getUser() {
@@ -38,12 +52,12 @@ public class CustomerReview {
 		this.stars = stars;
 	}
 
-	public String getText() {
-		return text;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setDescription(String text) {
+		this.description = text;
 	}
 	public Long getId() {
 		return id;

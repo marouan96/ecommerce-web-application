@@ -2,19 +2,27 @@ package com.asta.app.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Cart {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
 	private Long id;
+	
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id")
 	private User user;
+	
 	private List<Product> products;
 	
 	public Cart(User user,Product...products) {

@@ -1,4 +1,4 @@
-package Service;
+package com.asta.app.service;
 
 import java.util.Optional;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 
 import com.asta.app.model.User;
+import com.asta.app.repository.UserRepository;
 
-import Repository.UserRepository;
 
 @Service
 public class UserService {
