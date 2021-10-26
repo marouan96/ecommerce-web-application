@@ -29,7 +29,7 @@ public class CustomerReview {
 	private User user;
 	
 	@JsonIgnore
-	@JoinColumn(name ="user_id")
+	@JoinColumn(name ="product_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Product product;
 	
