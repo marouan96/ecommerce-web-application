@@ -5,3 +5,8 @@
 mvnw
 HELP.md
 mvnw.cmd
+*.class
+target
+src/main/resources/static/
+
+
