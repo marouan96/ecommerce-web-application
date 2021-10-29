@@ -1,6 +1,5 @@
 package com.asta.app.model;
 
-
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -11,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,32 +19,32 @@ public class CustomerReview {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name ="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@JsonIgnore
-	@JoinColumn(name ="product_id")
+	@JoinColumn(name = "product_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Product product;
-	
+
 	@Column(name = "stars")
-    private Integer stars;
-    
+	private Integer stars;
+
 	@Column(name = "descitption")
-    private String description;
-    
-	 @JsonFormat(pattern = "dd/MM/yyyy") 
-	 private LocalDate dateCreated;
-	 
-    public CustomerReview(User user, Integer stars, String description) {
-		this.user=user;
-    	this.stars=stars;
-		this.description=description;
+	private String description;
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate dateCreated;
+
+	public CustomerReview(User user, Integer stars, String description) {
+		this.user = user;
+		this.stars = stars;
+		this.description = description;
 	}
-    
+
 	public Product getProduct() {
 		return product;
 	}
@@ -78,8 +76,7 @@ public class CustomerReview {
 	public void setDescription(String text) {
 		this.description = text;
 	}
-	
-	
+
 	public LocalDate getDateCreated() {
 		return dateCreated;
 	}
@@ -95,5 +92,5 @@ public class CustomerReview {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 }

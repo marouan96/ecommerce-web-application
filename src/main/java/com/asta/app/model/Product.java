@@ -3,12 +3,16 @@ package com.asta.app.model;
 import java.sql.Blob;
 import java.util.List;
 
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 public class Product {
@@ -16,18 +20,17 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String title;
-	
-	@Column(length = 50000)
+
+	// @Column(length = 50000)
 	private String description;
-	
+
 	private Double price;
-	
-	
-    @Column(name = "quantity_in_stock")
-    private Integer quantity;
-	
+
+	@Column(name = "quantity_in_stock")
+	private Integer quantity;
+
 	@Column(name = "image_file")
 	@Lob
 	@JsonIgnore
@@ -35,18 +38,20 @@ public class Product {
 
 	@Column(name = "image")
 	private boolean image;
-	
-	@JsonProperty(access = Access.WRITE_ONLY)
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
 	private List<CustomerReview> comments;
-	
-	public Product(String title,String description,Double price, CustomerReview... comments) {
-		this.title=title;
-		this.price=price;
+
+	public Product(String title, Integer quantity, String description, boolean image, Double price,
+			CustomerReview... comments) {
+		this.title = title;
+		this.quantity = quantity;
+		this.image = image;
+		this.price = price;
 		this.description = description;
 		this.comments = List.of(comments);
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -78,8 +83,7 @@ public class Product {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	
-	
+
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -103,7 +107,7 @@ public class Product {
 	public void setImage(boolean image) {
 		this.image = image;
 	}
-	
+
 	public List<CustomerReview> getComments() {
 		return comments;
 	}
@@ -111,8 +115,5 @@ public class Product {
 	public void setComments(List<CustomerReview> comments) {
 		this.comments = comments;
 	}
-	
-	
-
 
 }

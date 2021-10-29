@@ -22,33 +22,33 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
-	
+
 	@NotNull
 	@Pattern(regexp = "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$")
 	@Size(min = 1, max = 50)
-	@Column(name = "user_name",length = 50,nullable = false)
+	@Column(name = "user_name", length = 50, nullable = false)
 	private String username;
-	
+
 	@Size(max = 50)
-    @Column(name = "first_name", length = 50)
+	@Column(name = "first_name", length = 50)
 	private String firstName;
-	
+
 	@Size(max = 50)
-    @Column(name = "last_name", length = 50)
+	@Column(name = "last_name", length = 50)
 	private String lastName;
 
-	@Email(regexp="^(.+)@(.+)$")
-    @Size(min = 5, max = 200)
-    @Column(name="email",length = 200, unique = true)
+	@Email(regexp = "^(.+)@(.+)$")
+	@Size(min = 5, max = 200)
+	@Column(name = "email", length = 200, unique = true)
 	private String email;
-	
+
 	@Pattern(regexp = "^\\d{10}$")
-	@Column(name="mobile_phone")
+	@Column(name = "mobile_phone")
 	private Integer MobilePhoneNumber;
-	
-	@Column(name="adress")
+
+	@Column(name = "adress")
 	private String address;
-	
+
 	@Column(name = "image_file")
 	@Lob
 	@JsonIgnore
@@ -56,30 +56,25 @@ public class User implements Serializable {
 
 	@Column(name = "image")
 	private boolean image;
-	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Cart cart;
-	
 
 	@JsonIgnore
 	@NotNull
-    @Size(min=8, max = 50)
-    @Column(name = "password_hash", length = 50, nullable = false)
+	@Size(min = 8, max = 50)
+	@Column(name = "password_hash", length = 50, nullable = false)
 	private String password;
-	
-	@OneToMany(mappedBy = "user",orphanRemoval = true)
+
+	@OneToMany(mappedBy = "user", orphanRemoval = true)
 	private List<Order> orders;
 
-	@OneToMany(mappedBy = "user",orphanRemoval = true)
+	@OneToMany(mappedBy = "user", orphanRemoval = true)
 	private List<CustomerReview> reviews;
-	
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
-	
-	
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -87,7 +82,6 @@ public class User implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 
 	public Blob getImageFile() {
 		return imageFile;
@@ -104,20 +98,23 @@ public class User implements Serializable {
 	public void setImage(boolean image) {
 		this.image = image;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public Integer getMobilePhoneNumber() {
 		return MobilePhoneNumber;
 	}
+
 	public void setMobilePhoneNumber(Integer mobilePhoneNumber) {
 		this.MobilePhoneNumber = mobilePhoneNumber;
 	}
-	
-	
+
 	public String getAddress() {
 		return address;
 	}
@@ -129,12 +126,15 @@ public class User implements Serializable {
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String Password) {
 		this.password = Password;
 	}
@@ -154,7 +154,7 @@ public class User implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	public List<Order> getOrders() {
 		return orders;
 	}
@@ -162,7 +162,7 @@ public class User implements Serializable {
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
-	
+
 	public List<CustomerReview> getReviews() {
 		return reviews;
 	}
@@ -186,6 +186,5 @@ public class User implements Serializable {
 	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
-	
-	
+
 }
