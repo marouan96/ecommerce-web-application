@@ -1,10 +1,13 @@
 package com.asta.app.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.asta.app.dto.UserDTO;
 import com.asta.app.model.Cart;
@@ -33,6 +36,7 @@ public class UserService {
 		return repository.existsById(id);
 	}
 	
+    @Transactional
 	public User Save(UserDTO userDTO) {
 		User user = new User();
 		user.setUsername(userDTO.getUserName());
@@ -41,10 +45,13 @@ public class UserService {
 		user.setPassword(password);
 		user.setAddress(userDTO.getAddress());
 		user.setMobilePhoneNumber(userDTO.getPhone());
-		user.setRoles("Customer");
+		List<String> roles = new ArrayList<>();
+		roles.add("CUSTOMER");
+		user.setRoles(roles);
 		Cart cart=cartRepository.save(new Cart(user));
 		user.setCart(cart);
-		return repository.save(user);
+		repository.save(user);
+		return user;
 		
 	}
 	

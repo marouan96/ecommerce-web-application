@@ -58,6 +58,7 @@ public class User implements Serializable {
 	@Column(name = "image")
 	private boolean image;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Cart cart;
 
@@ -76,6 +77,19 @@ public class User implements Serializable {
 	@Column(name="user_roles")
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
+	
+	public User() {
+		
+	}
+	
+	public User(String userName,String email, String MobilePhoneNumber,String address,String password,String... roles) {
+		this.userName=userName;
+		this.email=email;
+		this.MobilePhoneNumber=MobilePhoneNumber;
+		this.address=address;
+		this.password=password;
+		this.roles = List.of(roles);
+	}
 
 	public String getUsername() {
 		return userName;
@@ -185,8 +199,8 @@ public class User implements Serializable {
 		return roles;
 	}
 
-	public void setRoles(String... roles) {
-		this.roles=List.of(roles);
+	public void setRoles(List<String> roles) {
+		this.roles=roles;
 	}
 
 }
