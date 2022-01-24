@@ -1,9 +1,6 @@
 package com.asta.app.dto;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
-import com.asta.app.model.User;
 
 public class UserDTO {
 	
