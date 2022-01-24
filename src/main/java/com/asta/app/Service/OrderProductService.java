@@ -5,8 +5,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.asta.app.Repository.OrderProductRepository;
 import com.asta.app.model.OrderProduct;
+import com.asta.app.repository.OrderProductRepository;
 
 @Service
 public class OrderProductService {

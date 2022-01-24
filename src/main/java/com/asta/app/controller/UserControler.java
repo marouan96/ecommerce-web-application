@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException;
 
-import com.asta.app.Repository.UserRepository;
 import com.asta.app.dto.UserDTO;
 import com.asta.app.model.User;
+import com.asta.app.repository.UserRepository;
 import com.asta.app.service.UserService;
 
 import java.security.Principal;

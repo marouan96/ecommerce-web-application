@@ -1,4 +1,4 @@
-package com.asta.app.Repository;
+package com.asta.app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
