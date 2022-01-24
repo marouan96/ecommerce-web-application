@@ -20,12 +20,11 @@ public class Cart {
 	private User user;
 
 	@OneToMany()
-	@JoinColumn(name = "cart_id")
+	//@JoinColumn(name = "cart_id")
 	private List<Product> products;
 
-	public Cart(User user, Product... products) {
+	public Cart(User user) {
 		this.user = user;
-		this.products = List.of(products);
 	}
 
 	public User getUser() {

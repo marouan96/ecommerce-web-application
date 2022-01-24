@@ -1,6 +1,6 @@
 package com.asta.app.service;
 
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +15,15 @@ public class ProductService {
 	@Autowired
 	private ProductRepository repository;
 	
-	public Optional<Product> FindById(long id){
-		return repository.findById(id);
+	public Product FindById(long id){
+		return repository.findById(id).get();
 	}
+	
+	public Iterable<Product> findAll(){
+		return repository.findAll();
+		
+	}
+	
 	
 	public boolean Exist(long id) {
 		return repository.existsById(id);
@@ -30,5 +36,6 @@ public class ProductService {
 	public void DeleteById(long id) {
 		repository.deleteById(id);
 	}
+	
 	
 }

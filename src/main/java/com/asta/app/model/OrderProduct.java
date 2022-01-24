@@ -34,11 +34,11 @@ public class OrderProduct {
 		return getProduct().getPrice() * getQuantity();
 	}
 
-	public OrderProductEM getPk() {
+	public OrderProductEM getEM() {
 		return em;
 	}
 
-	public void setPk(OrderProductEM em) {
+	public void setEM(OrderProductEM em) {
 		this.em = em;
 	}
 

@@ -12,6 +12,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -27,7 +28,7 @@ public class User implements Serializable {
 	@Pattern(regexp = "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$")
 	@Size(min = 1, max = 50)
 	@Column(name = "user_name", length = 50, nullable = false)
-	private String username;
+	private String userName;
 
 	@Size(max = 50)
 	@Column(name = "first_name", length = 50)
@@ -42,9 +43,9 @@ public class User implements Serializable {
 	@Column(name = "email", length = 200, unique = true)
 	private String email;
 
-	@Pattern(regexp = "^\\d{10}$")
+	//@Pattern(regexp = "^\\d{10}$")
 	@Column(name = "mobile_phone")
-	private Integer MobilePhoneNumber;
+	private String MobilePhoneNumber;
 
 	@Column(name = "adress")
 	private String address;
@@ -62,8 +63,8 @@ public class User implements Serializable {
 
 	@JsonIgnore
 	@NotNull
-	@Size(min = 8, max = 50)
-	@Column(name = "password_hash", length = 50, nullable = false)
+	//@Size(min = 8)
+	@Column(name = "password_hash",nullable = false)
 	private String password;
 
 	@OneToMany(mappedBy = "user", orphanRemoval = true)
@@ -72,15 +73,16 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user", orphanRemoval = true)
 	private List<CustomerReview> reviews;
 
+	@Column(name="user_roles")
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
 
 	public String getUsername() {
-		return username;
+		return userName;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.userName = username;
 	}
 
 	public Blob getImageFile() {
@@ -107,11 +109,11 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public Integer getMobilePhoneNumber() {
+	public String getMobilePhoneNumber() {
 		return MobilePhoneNumber;
 	}
 
-	public void setMobilePhoneNumber(Integer mobilePhoneNumber) {
+	public void setMobilePhoneNumber(String mobilePhoneNumber) {
 		this.MobilePhoneNumber = mobilePhoneNumber;
 	}
 
@@ -183,8 +185,8 @@ public class User implements Serializable {
 		return roles;
 	}
 
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
+	public void setRoles(String... roles) {
+		this.roles=List.of(roles);
 	}
 
 }

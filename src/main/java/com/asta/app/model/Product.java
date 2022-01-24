@@ -23,11 +23,14 @@ public class Product {
 
 	private String title;
 
-	// @Column(length = 50000)
+	@Column(length = 10000)
 	private String description;
 
 	private Double price;
-
+	
+	@Column(name="department")
+    private String department;
+	
 	@Column(name = "quantity_in_stock")
 	private Integer quantity;
 
@@ -42,15 +45,14 @@ public class Product {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
 	private List<CustomerReview> comments;
 
-	public Product(String title, Integer quantity, String description, boolean image, Double price,
-			CustomerReview... comments) {
+	public Product(String title, Integer quantity, String description, boolean image, Double price) {
 		this.title = title;
 		this.quantity = quantity;
 		this.image = image;
 		this.price = price;
 		this.description = description;
-		this.comments = List.of(comments);
 	}
+	
 
 	public Long getId() {
 		return id;
@@ -82,6 +84,14 @@ public class Product {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
 	public Integer getQuantity() {
