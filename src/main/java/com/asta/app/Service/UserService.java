@@ -37,7 +37,8 @@ public class UserService {
 		User user = new User();
 		user.setUsername(userDTO.getUserName());
 		user.setEmail(userDTO.getEmail());
-		user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+		String password=passwordEncoder.encode(userDTO.getPassword());
+		user.setPassword(password);
 		user.setAddress(userDTO.getAddress());
 		user.setMobilePhoneNumber(userDTO.getPhone());
 		user.setRoles("Customer");
