@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.asta.app.Repository.CartRepository;
+import com.asta.app.Repository.UserRepository;
 import com.asta.app.dto.UserDTO;
 import com.asta.app.model.Cart;
 import com.asta.app.model.User;
-import com.asta.app.repository.CartRepository;
-import com.asta.app.repository.UserRepository;
 
 
 @Service

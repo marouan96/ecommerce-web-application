@@ -5,8 +5,8 @@ package com.asta.app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.asta.app.Repository.ProductRepository;
 import com.asta.app.model.Product;
-import com.asta.app.repository.ProductRepository;
 
 
 @Service

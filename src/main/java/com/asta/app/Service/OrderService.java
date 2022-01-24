@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.asta.app.Repository.OrderRepository;
 import com.asta.app.model.Order;
-import com.asta.app.repository.OrderRepository;
 
 @Service
 public class OrderService {

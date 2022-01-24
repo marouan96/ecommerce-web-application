@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.asta.app.Repository.UserRepository;
 import com.asta.app.model.User;
-import com.asta.app.repository.UserRepository;
 
 
 @Service
