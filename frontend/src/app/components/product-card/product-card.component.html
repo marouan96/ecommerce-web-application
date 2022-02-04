@@ -1,0 +1,15 @@
+<h2 align="center" class="display-4 mb-5">Books</h2>
+<div class="row card-deck text-center">
+    <div *ngFor="let product of products" class="col-lg-4 ">
+        <div class="card mb-4"  >
+            <div class="card-body">
+                <h4 class="card-title ">{{product.title}}</h4>
+                <div class="text-left">
+                    <p class="card-test"><strong>Description: </strong>{{product.description}}</p>
+                    <p class="card-test"><strong>Quantity: </strong>{{product.quantity}}</p>
+                    <p class="card-test"><strong>Department: </strong>{{product.department}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
