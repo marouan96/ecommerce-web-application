@@ -44,13 +44,17 @@ public class Product {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
 	private List<CustomerReview> comments;
+	
+	public Product() {
+	}
 
-	public Product(String title, Integer quantity, String description, boolean image, Double price) {
+	public Product(String title, Integer quantity, String description, Double price
+			,String department) {
 		this.title = title;
 		this.quantity = quantity;
-		this.image = image;
 		this.price = price;
 		this.description = description;
+		this.department=department;
 	}
 	
 
@@ -126,4 +130,5 @@ public class Product {
 		this.comments = comments;
 	}
 
+	
 }

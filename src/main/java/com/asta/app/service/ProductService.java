@@ -3,6 +3,8 @@ package com.asta.app.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.asta.app.model.Product;
@@ -37,5 +39,12 @@ public class ProductService {
 		repository.deleteById(id);
 	}
 	
+	public Page<Product> findAll(Pageable pageable){
+		return repository.findAll(pageable);
+	}
+	
+	public Page<Product> findAllByDepartment(String department,Pageable pageable){
+		return repository.findAllByDepartment(department, pageable);
+	}
 	
 }

@@ -39,9 +39,8 @@ public class UserControler {
         }*/
 	 }
 
-	@GetMapping("/users/me")
-	public ResponseEntity<User> me(HttpServletRequest request) {
-
+	@GetMapping("/users/profile")
+	public ResponseEntity<User> profile(HttpServletRequest request) {
 		Principal principal = request.getUserPrincipal();
 
 		if (principal != null) {
