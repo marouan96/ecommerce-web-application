@@ -14,6 +14,8 @@ export class ProductCardComponent implements OnInit {
   constructor(private route: ActivatedRoute,private service:ProductService) { }
    
    page=1;
+   size=3;
+   pageSizes=[3,6,9,12];
    products:Product[];
   ngOnInit():void{
     this.getProducts();
@@ -31,7 +33,11 @@ export class ProductCardComponent implements OnInit {
       });
   }
 
-  
+  onSizeChange(event){
+   this.size=event.target.value;
+   this.page=1;
+   this.getProducts();
+  }
 
   /*bookImage(product:Product){
     return product.
