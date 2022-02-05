@@ -1,6 +1,6 @@
 <h2 align="center" class="display-4 mb-5">Books</h2>
 <div class="row card-deck text-center">
-    <div *ngFor="let product of products" class="col-lg-4 ">
+    <div *ngFor="let product of products | paginate:{ itemsPerPage:6,currentPage:page}" class="col-lg-4 ">
         <div class="card mb-4"  >
             <div class="card-body">
                 <h4 class="card-title ">{{product.title}}</h4>
@@ -12,4 +12,5 @@
             </div>
         </div>
     </div>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
 </div>

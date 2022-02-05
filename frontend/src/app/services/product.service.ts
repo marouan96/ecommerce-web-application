@@ -21,6 +21,10 @@ export class ProductService {
     ) as Observable<Product[]>;
   }
 
+  getProductsPageable(params:any): Observable<any>{
+      return this.httpClient.get(URL+`pages?page=${params.page}&size=${params.size}`).pipe();
+  }
+
   private handleError(error: any) {
 		console.log("ERROR:");
 		console.error(error);

@@ -28,7 +28,7 @@ public class ProductController {
 	        return productService.findAll();
 	    }
 	     
-	    @GetMapping("/products")
+	    @GetMapping("/pages")
 	    public Page<Product> getPageableProducts(@RequestParam(value = "page",defaultValue = "1") Integer page,@RequestParam(value = "size",defaultValue = "3") Integer size){
 	    	PageRequest request= PageRequest.of(page-1,size);
 	    	return productService.findAll(request);
@@ -39,6 +39,7 @@ public class ProductController {
 	    	return productService.FindById(id);
 	    	
 	    }
+	    
 	    
 	    
 }
